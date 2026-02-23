@@ -204,82 +204,6 @@
             margin-top: 2rem;
         }
 
-        /* --- PESQUISA IA --- */
-        .ai-search-container {
-            background: linear-gradient(to right, #ffffff, #f0f7ff);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        
-        .ai-search-box {
-            display: flex;
-            gap: 10px;
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .ai-search-box input {
-            flex: 1;
-            padding: 1.2rem 1.5rem;
-            border: 2px solid #cbd5e0;
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
-        
-        .ai-search-box input:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
-        }
-        
-        .ai-search-box button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--white);
-            border: none;
-            padding: 0 2rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .ai-search-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
-        }
-
-        .ai-result {
-            background: var(--white);
-            border-left: 5px solid var(--primary);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: left;
-            display: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-top: 2rem;
-            animation: fadeInDown 0.5s ease;
-        }
-
-        .ai-result.loading {
-            display: block;
-            color: var(--text-muted);
-            text-align: center;
-            border-left: none;
-            background: transparent;
-            box-shadow: none;
-            font-size: 1.2rem;
-        }
-
         /* --- FAQ (ACCORDION) --- */
         .faq-item {
             background: var(--white);
@@ -361,8 +285,6 @@
             .menu-toggle { display: block; }
             .grid-2 { grid-template-columns: 1fr; }
             header h1 { font-size: 2rem; }
-            .ai-search-box { flex-direction: column; }
-            .ai-search-box button { padding: 1rem; justify-content: center; }
         }
 
         /* Animações */
@@ -384,7 +306,7 @@
                 <li><a href="#principios">Princípios</a></li>
                 <li><a href="#vulneraveis">Grupos</a></li>
                 <li><a href="#dicas">Como Agir</a></li>
-                <li><a href="#ia-search">IA Assistente</a></li> <!-- Link novo -->
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#ajuda">Pedir Ajuda</a></li>
             </ul>
         </div>
@@ -499,29 +421,8 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: Assistente IA -->
-    <section id="ia-search" style="background-color: var(--white);">
-        <div class="section-inner">
-            <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary);"></i> Pergunte à IA</h2>
-            <div class="ai-search-container">
-                <h3 style="margin-bottom: 10px; color: var(--text-dark);">Como posso te orientar agora?</h3>
-                <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Descreva rapidamente a situação de crise que você está presenciando e nossa Inteligência Artificial irá sugerir os melhores passos baseados no protocolo internacional de Primeiros Cuidados Psicológicos.
-                </p>
-                
-                <div class="ai-search-box">
-                    <input type="text" id="ai-input" placeholder="Ex: Meu amigo sofreu um acidente de trânsito leve e está em pânico..." autocomplete="off">
-                    <button id="ai-btn">Consultar <i class="fa-solid fa-paper-plane"></i></button>
-                </div>
-
-                <!-- Área onde a resposta vai aparecer -->
-                <div id="ai-response" class="ai-result"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ -->
-    <section id="faq">
+    <section id="faq" style="background-color: var(--white);">
         <div class="section-inner">
             <h2 class="section-title">Perguntas Frequentes (FAQ)</h2>
             <div class="faq-container">
@@ -542,7 +443,7 @@
     </section>
 
     <!-- Ajuda Profissional / Contatos -->
-    <section id="ajuda" style="background-color: var(--white);">
+    <section id="ajuda">
         <div class="section-inner">
             <h2 class="section-title">Quando e Onde Buscar Ajuda Especializada?</h2>
             <p style="text-align: center; max-width: 800px; margin: 0 auto;">Se a pessoa apresentar <strong>risco iminente contra a própria vida ou a de terceiros</strong>, incapacidade de cuidar de funções básicas (como não comer, não beber) ou confusão extrema (não saber quem é ou onde está), o suporte médico imediato é necessário.</p>
@@ -608,11 +509,13 @@
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
+                // Fecha as outras respostas abertas
                 faqItems.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
+                // Alterna a atual
                 item.classList.toggle('active');
             });
         });
@@ -624,58 +527,11 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     window.scrollTo({
-                        top: target.offsetTop - 70, 
+                        top: target.offsetTop - 70, // Compensa a altura do menu fixo
                         behavior: 'smooth'
                     });
                 }
             });
-        });
-
-        // --- SISTEMA DE SIMULAÇÃO DA IA ---
-        const aiInput = document.getElementById('ai-input');
-        const aiBtn = document.getElementById('ai-btn');
-        const aiResponse = document.getElementById('ai-response');
-
-        function realizarPesquisaIA() {
-            const query = aiInput.value.trim();
-            
-            // Não faz nada se o campo estiver vazio
-            if (!query) return;
-
-            // 1. Mostrar estado de carregamento
-            aiResponse.className = 'ai-result loading';
-            aiResponse.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> A IA está analisando a sua situação...';
-            
-            // 2. Simular o delay de uma requisição real de API (2 segundos)
-            setTimeout(() => {
-                aiResponse.className = 'ai-result';
-                
-                // Texto de resposta padrão para fins de simulação
-                aiResponse.innerHTML = `
-                    <h4 style="color: var(--primary-dark); margin-bottom: 12px; font-size: 1.2rem;">
-                        <i class="fa-solid fa-clipboard-check"></i> Orientação Recomendada
-                    </h4>
-                    <p style="margin-bottom: 10px;"><strong>Situação relatada:</strong> "${query}"</p>
-                    <p style="margin-bottom: 10px;">
-                        <strong>Como proceder:</strong> Mantenha a calma. Aproxime-se lentamente, respeitando o espaço pessoal. 
-                        Apresente-se e pergunte: "Posso ajudar em algo agora?". Foque nas necessidades básicas da pessoa (água, um lugar para sentar longe de aglomeração). 
-                        Escute sem interromper ou julgar. Se a pessoa apresentar risco à própria vida ou extrema confusão, acione o resgate (192) imediatamente.
-                    </p>
-                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 0.85rem; color: var(--danger);">
-                        <em><i class="fa-solid fa-triangle-exclamation"></i> Nota: Esta é uma simulação para fins demonstrativos. Em casos graves, busque a rede pública de saúde.</em>
-                    </div>
-                `;
-            }, 2000);
-        }
-
-        // Acionar a IA ao clicar no botão
-        aiBtn.addEventListener('click', realizarPesquisaIA);
-
-        // Acionar a IA ao apertar a tecla "Enter"
-        aiInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                realizarPesquisaIA();
-            }
         });
     </script>
 
