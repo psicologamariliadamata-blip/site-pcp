@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeiros Cuidados Psicológicos | Guia Completo</title>
-    <!-- FontAwesome para Ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Guia Completo: Primeiros Cuidados Psicológicos</title>
     <style>
-        /* Variáveis de Cores e Estilos */
+        /* Variáveis de Cores e Tema */
         :root {
-            --primary: #2b6cb0; 
-            --primary-dark: #1a365d;
-            --secondary: #4299e1;
-            --bg-light: #f7fafc;
-            --text-dark: #2d3748;
+            --primary: #2b6cb0;
+            --primary-light: #ebf8ff;
+            --primary-dark: #2c5282;
+            --text-main: #2d3748;
             --text-muted: #718096;
+            --bg-light: #f7fafc;
             --white: #ffffff;
             --success: #38a169;
             --danger: #e53e3e;
             --warning: #dd6b20;
         }
 
+        /* Reset e Configurações Base */
         * {
             margin: 0;
             padding: 0;
@@ -30,16 +28,15 @@
         }
 
         body {
-            color: var(--text-dark);
+            color: var(--text-main);
             line-height: 1.6;
             background-color: var(--bg-light);
-            padding-top: 70px;
         }
 
-        /* --- NAVEGAÇÃO --- */
+        /* --- Navegação --- */
         nav {
             background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: fixed;
             width: 100%;
             top: 0;
@@ -57,7 +54,7 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
@@ -73,69 +70,82 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--text-main);
             font-weight: 500;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
-        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a:hover { color: var(--primary); }
 
+        /* Menu Mobile Toggle */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            flex-direction: column;
             cursor: pointer;
-            color: var(--primary);
+            gap: 5px;
         }
 
-        /* --- HERO SECTION --- */
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            transition: 0.3s;
+        }
+
+        /* --- Cabeçalho (Hero) --- */
         header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            color: var(--white);
-            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #c3ddfa 100%);
+            padding: 8rem 2rem 5rem;
             text-align: center;
+            border-bottom: 4px solid var(--primary);
         }
 
         header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease;
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-inline: auto;
         }
 
         header p {
             font-size: 1.2rem;
+            color: var(--text-main);
             max-width: 700px;
             margin: 0 auto 2rem;
-            opacity: 0.9;
         }
 
         .btn {
-            background-color: var(--white);
-            color: var(--primary-dark);
-            padding: 1rem 2rem;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 2rem;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: inline-block;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(43, 108, 176, 0.2);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
-        /* --- SEÇÕES GERAIS --- */
+        /* --- Estrutura de Seções --- */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        section:nth-child(even) { background-color: var(--white); max-width: 100%; }
+        section:nth-child(even) {
+            background-color: var(--white);
+            max-width: 100%;
+        }
 
-        .section-inner {
+        .section-content {
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -145,109 +155,171 @@
             font-size: 2.2rem;
             color: var(--primary-dark);
             margin-bottom: 3rem;
+            position: relative;
         }
 
-        /* --- GRIDS --- */
-        .grid-2, .grid-3 {
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Grid Cards (Princípios e Contexto) --- */
+        .grid-3 {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        .grid-2 { grid-template-columns: 1fr 1fr; }
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 
         .card {
-            background: var(--white);
+            background-color: var(--white);
             padding: 2.5rem 2rem;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
             transition: transform 0.3s;
-            border-bottom: 4px solid var(--primary);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover { transform: translateY(-5px); }
 
-        .card i {
+        .card-icon {
             font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .card h3 { margin-bottom: 1rem; color: var(--text-dark); }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
 
-        /* --- DOS AND DONTS --- */
+        /* --- O que fazer / Não Fazer --- */
+        .dos-donts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
         .list-box {
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background: var(--white);
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 12px;
         }
 
         .list-box.do { border-top: 5px solid var(--success); }
         .list-box.dont { border-top: 5px solid var(--danger); }
 
-        .list-box h3 { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .list-box h3 { margin-bottom: 1.5rem; font-size: 1.4rem; }
         .list-box.do h3 { color: var(--success); }
         .list-box.dont h3 { color: var(--danger); }
 
-        .list-box ul { list-style: none; }
-        .list-box li { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 10px; }
-        .list-box.do li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--success); }
-        .list-box.dont li::before { content: "\f00d"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--danger); }
-
-        /* --- AUTOCUIDADO --- */
-        .self-care {
-            background-color: #fffaf0;
-            border-left: 5px solid var(--warning);
-            padding: 2rem;
-            border-radius: 0 10px 10px 0;
-            margin-top: 2rem;
+        .list-box ul {
+            list-style: none;
         }
 
-        /* --- FAQ (ACCORDION) --- */
-        .faq-item {
+        .list-box li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .list-box.do li::before {
+            content: '✓';
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .list-box.dont li::before {
+            content: '✕';
+            color: var(--danger);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- Populações Específicas --- */
+        .special-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .group-card {
+            background: var(--primary-light);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .group-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Mitos e Verdades (Accordion) --- */
+        details {
             background: var(--white);
             margin-bottom: 1rem;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
-        .faq-question {
-            padding: 1.5rem;
+        summary {
+            padding: 1.2rem;
             font-weight: bold;
             cursor: pointer;
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--primary-dark);
-            background: var(--white);
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
         }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: #fafafa;
+        summary::-webkit-details-marker { display: none; }
+        
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
         }
 
-        .faq-answer p { padding: 0 1.5rem 1.5rem; }
-        .faq-item.active .faq-answer { max-height: 200px; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        details[open] summary::after { content: '-'; }
 
-        /* --- EMERGÊNCIA --- */
+        .details-content {
+            padding: 0 1.2rem 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Autocuidado e Ajuda --- */
+        .alert-box {
+            background-color: #fffaf0;
+            border-left: 5px solid var(--warning);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .alert-box h3 { color: #c05621; margin-bottom: 1rem; }
+
         .emergency-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
         }
 
-        .contact-card {
+        .emergency-card {
             background: #fff5f5;
             padding: 1.5rem;
             border-radius: 8px;
@@ -255,42 +327,39 @@
             text-align: center;
         }
 
-        .contact-card h4 { color: var(--danger); font-size: 1.5rem; margin: 10px 0; }
+        .emergency-card h4 { color: var(--danger); font-size: 1.5rem; margin-bottom: 0.5rem; }
 
-        /* --- FOOTER --- */
+        /* --- Footer --- */
         footer {
-            background-color: var(--primary-dark);
+            background-color: var(--text-main);
             color: var(--white);
             text-align: center;
             padding: 3rem 2rem;
         }
 
-        footer p { margin-bottom: 1rem; opacity: 0.8; }
-
-        /* --- RESPONSIVIDADE --- */
+        /* --- Responsividade --- */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 70px;
-                left: 0;
+                left: -100%;
                 width: 100%;
-                background: var(--white);
-                padding: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                background-color: var(--white);
+                flex-direction: column;
+                text-align: center;
+                gap: 0;
+                transition: 0.3s ease-in-out;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
             }
-            .nav-links.active { display: flex; }
-            .nav-links li { text-align: center; padding: 10px 0; }
-            .menu-toggle { display: block; }
-            .grid-2 { grid-template-columns: 1fr; }
-            header h1 { font-size: 2rem; }
-        }
 
-        /* Animações */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            .nav-links.active { left: 0; }
+
+            .nav-links li { padding: 1.5rem 0; border-top: 1px solid var(--bg-light); }
+
+            .menu-toggle { display: flex; }
+
+            header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -299,14 +368,18 @@
     <!-- Navegação -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo"><i class="fa-solid fa-hand-holding-heart"></i> Guia PCP</a>
-            <i class="fa-solid fa-bars menu-toggle" id="mobile-menu-btn"></i>
+            <a href="#" class="logo">💙 ApoioPsi</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#sobre">O que é?</a></li>
-                <li><a href="#principios">Princípios</a></li>
-                <li><a href="#vulneraveis">Grupos</a></li>
+                <li><a href="#sobre">O que são?</a></li>
+                <li><a href="#principios">Os 3 Princípios</a></li>
                 <li><a href="#dicas">Como Agir</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#grupos">Casos Específicos</a></li>
+                <li><a href="#autocuidado">Autocuidado</a></li>
                 <li><a href="#ajuda">Pedir Ajuda</a></li>
             </ul>
         </div>
@@ -314,23 +387,30 @@
 
     <!-- Cabeçalho -->
     <header id="inicio">
-        <h1>Primeiros Cuidados Psicológicos</h1>
-        <p>Apoio humano, prático e solidário a pessoas em situação de sofrimento recente. Você não precisa ser um psicólogo para oferecer ajuda e compaixão.</p>
-        <a href="#principios" class="btn">Entenda como ajudar</a>
+        <h1>Primeiros Cuidados Psicológicos (PCP)</h1>
+        <p>Apoio humano, solidário e prático a pessoas que vivenciaram uma situação de crise ou sofrimento intenso. Você não precisa ser psicólogo para ajudar a salvar uma vida.</p>
+        <a href="#principios" class="btn">Conhecer o Método da OMS</a>
     </header>
 
-    <!-- O que são / Mitos e Verdades -->
-    <section id="sobre" style="background-color: var(--white);">
-        <div class="section-inner">
-            <h2 class="section-title">O que é (e o que não é) o PCP?</h2>
-            <div class="grid-2">
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fa-solid fa-check-circle"></i> O que É:</h3>
-                    <p>Envolve oferecer cuidado não intrusivo e prático, avaliar necessidades básicas (como água, abrigo, informações) e ouvir sem pressionar a pessoa a falar. É ajudar a pessoa a se acalmar e conectá-la a redes de apoio.</p>
+    <!-- O que, Quem, Quando, Onde -->
+    <section id="sobre">
+        <div class="section-content">
+            <h2 class="section-title">O Básico sobre os PCP</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Quem pode aplicar?</h3>
+                    <p>Qualquer pessoa orientada pode aplicar. Os PCP não são aconselhamento profissional nem psicoterapia. Trata-se de oferecer conforto e escuta segura.</p>
                 </div>
-                <div>
-                    <h3 style="color: var(--danger); margin-bottom: 1rem;"><i class="fa-solid fa-times-circle"></i> O que NÃO é:</h3>
-                    <p>Não é terapia. Não é aconselhamento profissional. Não envolve pedir à pessoa que analise o que aconteceu ou que detalhe cronologicamente os eventos do trauma. Não é julgar os sentimentos do outro.</p>
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Quando aplicar?</h3>
+                    <p>Idealmente durante ou logo após o evento estressante/traumático. Contudo, em alguns casos, as pessoas podem precisar de apoio semanas após o evento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📍</div>
+                    <h3>Onde aplicar?</h3>
+                    <p>Em qualquer local que seja seguro o suficiente. Idealmente, deve-se buscar um local onde haja privacidade e proteção contra o clima e a exposição pública.</p>
                 </div>
             </div>
         </div>
@@ -338,140 +418,149 @@
 
     <!-- Princípios Básicos -->
     <section id="principios">
-        <div class="section-inner">
-            <h2 class="section-title">Os 3 Princípios de Ação (OMS)</h2>
-            <p style="text-align: center; margin-bottom: 3rem; color: var(--text-muted);">A Organização Mundial da Saúde define três passos cruciais para a aplicação segura do PCP.</p>
+        <div class="section-content">
+            <h2 class="section-title">Os Princípios de Ação (Método OMS)</h2>
             <div class="grid-3">
-                <div class="card">
-                    <i class="fa-solid fa-eye"></i>
+                <div class="card" style="border-top: 4px solid var(--warning)">
+                    <div class="card-icon">👀</div>
                     <h3>1. Observar</h3>
-                    <p>Verifique a segurança do local. Verifique se há pessoas com necessidades básicas ou ferimentos urgentes. Observe quem apresenta reações graves de angústia antes de se aproximar.</p>
+                    <p>Antes de se aproximar, verifique a segurança do local. Observe se há pessoas com necessidades básicas urgentes (ferimentos) ou que apresentam reações graves de angústia (paralisia, choro extremo).</p>
                 </div>
-                <div class="card">
-                    <i class="fa-solid fa-ear-listen"></i>
+                <div class="card" style="border-top: 4px solid var(--primary)">
+                    <div class="card-icon">👂</div>
                     <h3>2. Ouvir</h3>
-                    <p>Aproxime-se das pessoas que precisam de apoio. Pergunte sobre suas preocupações, necessidades imediatas e ouça com atenção, ajudando-as a se sentirem seguras e calmas.</p>
+                    <p>Aproxime-se com calma. Pergunte sobre as necessidades da pessoa. Ouça ativamente, sem interromper ou julgar. Ajude a pessoa a se acalmar respeitando o ritmo dela.</p>
                 </div>
-                <div class="card">
-                    <i class="fa-solid fa-link"></i>
-                    <h3>3. Aproximar (Conectar)</h3>
-                    <p>Ajude as pessoas a resolverem suas necessidades imediatas. Conecte-as a serviços, informações confiáveis e, principalmente, a entes queridos e suporte social.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Grupos Vulneráveis -->
-    <section id="vulneraveis" style="background-color: var(--white);">
-        <div class="section-inner">
-            <h2 class="section-title">Atenção a Grupos Vulneráveis</h2>
-            <div class="grid-3">
-                <div class="card" style="border-bottom-color: #ed8936;">
-                    <i class="fa-solid fa-child-reaching" style="color: #ed8936;"></i>
-                    <h3>Crianças e Adolescentes</h3>
-                    <p>Reúna-os com seus cuidadores o mais rápido possível. Mantenha o tom de voz calmo. Não minta sobre o que aconteceu, use palavras adequadas à idade.</p>
-                </div>
-                <div class="card" style="border-bottom-color: #9f7aea;">
-                    <i class="fa-solid fa-person-cane" style="color: #9f7aea;"></i>
-                    <h3>Idosos</h3>
-                    <p>Podem precisar de ajuda para mobilidade ou para encontrar medicações perdidas. Seja paciente. A confusão pode ser apenas desorientação devido ao trauma recente.</p>
-                </div>
-                <div class="card" style="border-bottom-color: #38b2ac;">
-                    <i class="fa-solid fa-wheelchair" style="color: #38b2ac;"></i>
-                    <h3>Pessoas com Deficiência</h3>
-                    <p>Pergunte como pode ajudar antes de agir. Mantenha equipamentos de mobilidade junto a eles. Assegure-se de que consigam acessar áreas de abrigo ou comunicação.</p>
+                <div class="card" style="border-top: 4px solid var(--success)">
+                    <div class="card-icon">🤝</div>
+                    <h3>3. Aproximar</h3>
+                    <p>Conecte a pessoa aos serviços de ajuda profissional. Ajude-a a resolver necessidades básicas (água, telefone). Facilite o contato dela com familiares e redes de apoio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- O que fazer / O que não fazer e Autocuidado -->
+    <!-- O que fazer / O que não fazer -->
     <section id="dicas">
-        <div class="section-inner">
-            <h2 class="section-title">Guia Prático de Abordagem</h2>
-            <div class="grid-2">
+        <div class="section-content">
+            <h2 class="section-title">Diretrizes Práticas de Conduta</h2>
+            <div class="dos-donts">
                 <div class="list-box do">
-                    <h3><i class="fa-solid fa-thumbs-up"></i> O que Fazer e Dizer</h3>
+                    <h3>O que FAZER e DIZER</h3>
                     <ul>
-                        <li>Encontre um lugar tranquilo e seguro para conversar.</li>
-                        <li>Diga quem você é e explique que está ali para ajudar.</li>
-                        <li>Pergunte o que a pessoa precisa no momento (água, casaco, telefone).</li>
-                        <li>Aja de maneira calma e demonstre escuta ativa.</li>
-                        <li>Permita o silêncio. Ficar ao lado já é reconfortante.</li>
-                        <li>Diga: "Sinto muito por isso", "Entendo que esteja triste".</li>
+                        <li>Seja honesto e confiável.</li>
+                        <li>Respeite o direito da pessoa de não querer conversar.</li>
+                        <li>Diga frases validadoras: "Sinto muito pelo que aconteceu", "Você está seguro agora".</li>
+                        <li>Ofereça ajuda prática (um copo d'água, um casaco, um telefone).</li>
+                        <li>Mantenha um tom de voz suave e calmo.</li>
+                        <li>Reconheça as forças da pessoa e como ela tem se ajudado.</li>
                     </ul>
                 </div>
                 <div class="list-box dont">
-                    <h3><i class="fa-solid fa-thumbs-down"></i> O que Evitar</h3>
+                    <h3>O que NÃO FAZER e NÃO DIZER</h3>
                     <ul>
-                        <li>Não pressione a pessoa a contar detalhes do evento.</li>
-                        <li>Não faça falsas promessas (ex: "Tudo vai ficar bem amanhã").</li>
-                        <li>Não minimize a dor (Evite: "Pelo menos você está vivo", "Você tem que ser forte").</li>
-                        <li>Não conte histórias dos seus próprios problemas ou de terceiros.</li>
-                        <li>Não julgue as reações da pessoa (se chora, grita ou fica apática).</li>
+                        <li>Não force a pessoa a contar sua história ou detalhes do trauma.</li>
+                        <li>Não interrompa ou apresse a pessoa enquanto ela fala.</li>
+                        <li>Não use frases clichês ("Tudo vai ficar bem", "Poderia ter sido pior").</li>
+                        <li>Não julgue o que ela fez ou deixou de fazer para sobreviver.</li>
+                        <li>Não prometa coisas que você não pode cumprir.</li>
+                        <li>Não compartilhe as informações da pessoa com curiosos.</li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Bloco de Autocuidado -->
-            <div class="self-care">
-                <h3 style="color: var(--warning); margin-bottom: 1rem;"><i class="fa-solid fa-heart-pulse"></i> O Seu Autocuidado</h3>
-                <p>Prestar primeiros cuidados psicológicos pode ser exaustivo. <strong>Lembre-se:</strong> você não pode ajudar se o seu "copo estiver vazio". Antes de intervir, avalie se você tem condições emocionais. Depois de ajudar, reserve um tempo para descansar, converse com alguém de confiança sobre como você se sentiu e não hesite em buscar suporte profissional se as imagens ou sentimentos do trauma o acompanharem nos dias seguintes.</p>
-            </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" style="background-color: var(--white);">
-        <div class="section-inner">
-            <h2 class="section-title">Perguntas Frequentes (FAQ)</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">Eu preciso ser psicólogo para aplicar o PCP? <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="faq-answer"><p>Não. Os Primeiros Cuidados Psicológicos foram desenhados para que qualquer pessoa bem-intencionada e instruída possa aplicá-los, assim como os primeiros socorros físicos (fazer um curativo, por exemplo).</p></div>
+    <!-- Populações Específicas -->
+    <section id="grupos">
+        <div class="section-content">
+            <h2 class="section-title">Atenção a Grupos Vulneráveis</h2>
+            <div class="special-groups">
+                <div class="group-card">
+                    <h4>👶 Crianças e Adolescentes</h4>
+                    <p>Abaixe-se na altura dos olhos da criança. Use palavras simples e não separe crianças de seus cuidadores, a menos que seja estritamente necessário para sua segurança.</p>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question">E se a pessoa chorar incontrolavelmente? <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="faq-answer"><p>O choro é uma reação natural ao estresse e ao trauma. Não tente parar o choro da pessoa dizendo "não chore". Ofereça um lenço, água e permaneça ao lado dela em silêncio ou afirmando que ela está segura agora.</p></div>
+                <div class="group-card">
+                    <h4>🧓 Idosos</h4>
+                    <p>Fale com clareza (sem gritar). Certifique-se de que estão com seus óculos, aparelhos auditivos ou bengalas. Questione com delicadeza sobre medicamentos de uso contínuo que possam ter perdido.</p>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question">Quanto tempo dura a aplicação do PCP? <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="faq-answer"><p>Pode durar de alguns minutos a algumas horas, dependendo do contexto. É uma intervenção imediata, focada apenas no momento da crise. Depois, a pessoa deve ser encaminhada a redes de apoio contínuas, se necessário.</p></div>
+                <div class="group-card">
+                    <h4>♿ Pessoas com Deficiência</h4>
+                    <p>Pergunte como pode ajudá-los em vez de simplesmente assumir que sabem do que precisam. Garanta que a área de abrigo e os banheiros sejam acessíveis a eles.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ajuda Profissional / Contatos -->
+    <!-- Mitos e Verdades -->
+    <section id="mitos" style="background-color: var(--white);">
+        <div class="section-content">
+            <h2 class="section-title">Mitos e Verdades</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <details>
+                    <summary>As pessoas precisam falar sobre o trauma para superá-lo.</summary>
+                    <div class="details-content">
+                        <strong>Mito.</strong> Forçar alguém a reviver o trauma pode causar re-traumatização. Respeite se a pessoa preferir o silêncio.
+                    </div>
+                </details>
+                <details>
+                    <summary>Chorar faz a pessoa piorar, devo pedir para ela se acalmar.</summary>
+                    <div class="details-content">
+                        <strong>Mito.</strong> O choro é uma forma natural de processar o estresse. Deixe a pessoa chorar, ofereça um lenço e fique presente em silêncio.
+                    </div>
+                </details>
+                <details>
+                    <summary>Primeiros Cuidados Psicológicos não são terapia.</summary>
+                    <div class="details-content">
+                        <strong>Verdade.</strong> O objetivo é fornecer alívio imediato e suporte prático, e não fazer diagnósticos psicológicos ou tratar patologias.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Autocuidado -->
+    <section id="autocuidado">
+        <div class="section-content">
+            <h2 class="section-title">O Cuidado de Quem Cuida</h2>
+            <div class="alert-box">
+                <h3>A Regra de Ouro: Proteja-se primeiro</h3>
+                <p>Ajudar pessoas em situação de crise pode ser desgastante. Você não pode servir água de um copo vazio.</p>
+                <ul style="margin-top: 1rem; margin-left: 1.5rem;">
+                    <li><strong>Antes de ajudar:</strong> Avalie se você está física e emocionalmente apto.</li>
+                    <li><strong>Durante:</strong> Faça pausas. Peça ajuda a outros voluntários se a situação estiver pesada.</li>
+                    <li><strong>Depois:</strong> Converse com alguém de sua confiança sobre o que você viveu. Descanse, coma bem e evite consumir álcool para lidar com o estresse da ajuda.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ajuda Profissional -->
     <section id="ajuda">
-        <div class="section-inner">
-            <h2 class="section-title">Quando e Onde Buscar Ajuda Especializada?</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto;">Se a pessoa apresentar <strong>risco iminente contra a própria vida ou a de terceiros</strong>, incapacidade de cuidar de funções básicas (como não comer, não beber) ou confusão extrema (não saber quem é ou onde está), o suporte médico imediato é necessário.</p>
-
+        <div class="section-content">
+            <h2 class="section-title">Contatos de Emergência (Brasil)</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Acione ajuda profissional se a pessoa não conseguir cuidar de si mesma, estiver profundamente desorientada ou em risco de ferir a si mesma ou aos outros.</p>
+            
             <div class="emergency-grid">
-                <div class="contact-card">
-                    <i class="fa-solid fa-phone-volume fa-2x" style="color: var(--danger);"></i>
-                    <h4>Ligue 188</h4>
-                    <p><strong>CVV</strong></p>
-                    <p style="font-size: 0.9rem;">Centro de Valorização da Vida. Atendimento 24h, gratuito e sob total sigilo.</p>
+                <div class="emergency-card">
+                    <h4>📞 188</h4>
+                    <strong>CVV</strong>
+                    <p>Centro de Valorização da Vida. Apoio emocional gratuito, sigiloso e 24h.</p>
                 </div>
-                <div class="contact-card">
-                    <i class="fa-solid fa-ambulance fa-2x" style="color: var(--danger);"></i>
-                    <h4>Ligue 192</h4>
-                    <p><strong>SAMU</strong></p>
-                    <p style="font-size: 0.9rem;">Para urgências de saúde, surtos psicóticos ou tentativas de suicídio em andamento.</p>
+                <div class="emergency-card">
+                    <h4>🚑 192</h4>
+                    <strong>SAMU</strong>
+                    <p>Emergências médicas urgentes, incluindo surtos psicóticos graves.</p>
                 </div>
-                <div class="contact-card">
-                    <i class="fa-solid fa-fire-extinguisher fa-2x" style="color: var(--danger);"></i>
-                    <h4>Ligue 193</h4>
-                    <p><strong>Bombeiros</strong></p>
-                    <p style="font-size: 0.9rem;">Resgate imediato em situações de desastres, acidentes e risco de vida.</p>
+                <div class="emergency-card">
+                    <h4>🚒 193</h4>
+                    <strong>Bombeiros</strong>
+                    <p>Prevenção de suicídio em andamento e resgate em áreas de risco.</p>
                 </div>
-                <div class="contact-card">
-                    <i class="fa-solid fa-hospital fa-2x" style="color: var(--primary);"></i>
-                    <h4>CAPS / UPA</h4>
-                    <p><strong>Rede Pública</strong></p>
-                    <p style="font-size: 0.9rem;">Procure o Centro de Atenção Psicossocial ou a UPA mais próxima de você.</p>
+                <div class="emergency-card">
+                    <h4>🏥 CAPS</h4>
+                    <strong>Rede SUS</strong>
+                    <p>Centro de Atenção Psicossocial. Busque na sua cidade para tratamento contínuo.</p>
                 </div>
             </div>
         </div>
@@ -479,55 +568,42 @@
 
     <!-- Rodapé -->
     <footer>
-        <div class="section-inner">
-            <p><i class="fa-solid fa-heart"></i> Feito para promover a empatia e o cuidado em nossa sociedade.</p>
-            <p style="font-size: 0.9rem; margin-top: 1rem;">Conteúdo baseado no guia de "Primeiros Cuidados Psicológicos: Guia para trabalhadores de campo" da Organização Mundial da Saúde (OMS).</p>
-            <p style="font-size: 0.8rem; color: #a0aec0; margin-top: 2rem;">Aviso: O conteúdo deste site é puramente informativo e educacional. Não substitui diagnóstico, tratamento psiquiátrico ou terapia psicológica.</p>
-        </div>
+        <p><strong>ApoioPsi</strong> - Diretrizes baseadas nos manuais da Organização Mundial da Saúde (OMS) e OPAS.</p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: #a0aec0;">
+            * Isenção de responsabilidade: Este site tem fins estritamente informativos. O treinamento prático é encorajado. Em caso de sofrimento prolongado, busque sempre um profissional de saúde mental (Psicólogo ou Psiquiatra).
+        </p>
     </footer>
 
-    <!-- Scripts da Página -->
+    <!-- Scripts -->
     <script>
-        // Menu Mobile Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
+        // Menu Mobile (Hamburguer)
+        const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-links a');
 
-        menuBtn.addEventListener('click', () => {
+        menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Fechar menu mobile ao clicar em um link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        // Fechar menu ao clicar em um link
+        links.forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
             });
         });
 
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Fecha as outras respostas abertas
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                // Alterna a atual
-                item.classList.toggle('active');
-            });
-        });
-
-        // Rolagem Suave (Smooth Scroll)
+        // Rolagem Suave
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
+                if(target) {
+                    // Compensa a altura do menu fixo (aprox 70px)
+                    const offsetTop = target.offsetTop - 70;
                     window.scrollTo({
-                        top: target.offsetTop - 70, // Compensa a altura do menu fixo
+                        top: offsetTop,
                         behavior: 'smooth'
                     });
                 }
